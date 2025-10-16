@@ -13,7 +13,12 @@ def create_app(config_class=Config):
     db.init_app(app)
     migrate.init_app(app, db)
 
+    # Importação das Rotas Normais
     from .routes import main_bp
     app.register_blueprint(main_bp)
+
+    # Importação das Rotas da API
+    from .api_routes import api_bp
+    app.register_blueprint(api_bp)
 
     return app

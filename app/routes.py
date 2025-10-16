@@ -11,11 +11,6 @@ def index():
 
 @main_bp.route('/add', methods=['POST'])
 def add_task():
-    title = request.form.get('title')
-    description = request.form.get('description')
-    new_task = Task(title=title, description=description) # Cria o objeto
-    db.session.add(new_task)     # Adiciona na "área de preparação"
-    db.session.commit()          # Salva permanentemente no banco
     return redirect(url_for('main.index'))
 
 @main_bp.route('/update/<int:task_id>')

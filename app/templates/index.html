@@ -1,57 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Gerenciador de Tarefas Simples</title>
-  </head>
-  <body>
-    <h1>Meu Gerenciador de Tarefas</h1>
-
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciador de Tarefas</title>
+</head>
+<body>
+  <h1>Meu Gerenciador de Tarefas</h1>
     <hr />
 
     <h2>Adicionar Nova Tarefa</h2>
-    <form action="{{ url_for('main.add_task') }}" method="POST">
-      <label for="title">Título:</label>
-      <input
-        type="text"
-        name="title"
-        id="title"
-        placeholder="Digite o título da tarefa..."
-        required
-      />
+    <form id="add-task-form">
+        <label for="title">Título:</label>
+        <input type="text" id="title" placeholder="Digite o título..." required />
 
-      <label for="description">Descrição:</label>
-      <input type="text" name="description" required />
+        <label for="description">Descrição:</label>
+        <input type="text" id="description" required />
 
-      <button type="submit">Adicionar Tarefa</button>
+        <button type="submit">Adicionar Tarefa</button>
     </form>
 
     <hr />
 
     <h2>Lista de Tarefas</h2>
-
-    {% if tasks %}
-    <ul>
-      {% for task in tasks %}
-      <li>
-        {{ task.title }} {% if task.done %}
-        <strong>(Concluída)</strong>
-        {% endif %} &nbsp; | &nbsp;
-        <a href="{{ url_for('main.update_task', task_id=task.id) }}">
-          {% if task.done %}Reabrir{% else %}Concluir{% endif %}
-        </a>
-        &nbsp;
-        <a
-          href="{{ url_for('main.delete_task', task_id=task.id) }}"
-          onclick="return confirm('Tem certeza?');"
-        >
-          Excluir
-        </a>
-      </li>
-      {% endfor %}
+    <ul id="task-list">
+        <p>Carregando tarefas...</p>
     </ul>
-    {% else %}
-    <p>Nenhuma tarefa encontrada. Adicione uma acima!</p>
-    {% endif %}
-  </body>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
 </html>
